@@ -1,24 +1,18 @@
-import { APIRelationshipUser } from '../../api-types';
+import BetterMap from '../../BetterMap';
 import Client from '../Client';
 import User from '../User';
 
-type UserResolvable = User | APIRelationshipUser | string;
-
 export default class UserManager {
   private client: Client;
-  cache: Map<string, User>;
+  cache: BetterMap<string, User>;
 
   constructor(client: Client) {
     this.client = client;
-    this.cache = new Map<string, User>();
+    this.cache = new BetterMap<string, User>();
   }
 
-  resolve(user: UserResolvable) {
-
-  }
-
-  async fetch(id: string): Promise<User> {
-    {
+  async fetch(id: string, force?: boolean) {
+    if(!force) {
       const cached = this.cache.get(id);
       if(cached) return cached;
     }

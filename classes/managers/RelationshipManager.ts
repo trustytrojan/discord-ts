@@ -1,13 +1,15 @@
+import BetterMap from '../../BetterMap';
 import Client from '../Client';
 import Relationship from '../Relationship';
+import { RelationshipType } from '../../enums';
 
 export default class RelationshipManager {
-  private client: Client;
-  cache: Map<string, Relationship>;
+  private readonly client: Client;
+  readonly cache: BetterMap<string, Relationship>;
 
   constructor(client: Client) {
     this.client = client;
-    this.cache = new Map<string, Relationship>();
+    this.cache = new BetterMap<string, Relationship>();
   }
 
   async fetch() {
@@ -16,12 +18,42 @@ export default class RelationshipManager {
       this.cache.set(_data.id, new Relationship(this.client, _data));
   }
 
-  async sendFriendRequest(user_id: string) {
-    const [username, discriminator] = (await this.client.users.fetch(user_id)).tag.split('#');
-    this.client.api.post('/users/@me/relationships', { username, discriminator: parseInt(discriminator) });
+  get friends() {
+    return this.cache.filter((r) => r.type === RelationshipType.Friend);
   }
 
-  cancelFriendRequest(user_id: string) {
+  get blocked() {
+    return this.cache.filter((r) => r.type === RelationshipType.Blocked);
+  }
 
+  get incomingRequests() {
+    return this.cache.filter((r) => r.type === RelationshipType.PendingIncoming);
+  }
+
+  get outgoingRequests() {
+    return this.cache.filter((r) => r.type === RelationshipType.PendingOutgoing);
+  }
+
+  /**
+   * Send a friend request to a Discord user.
+   * @param username 
+   * @param discriminator 
+   */
+  create(username: string, discriminator: string | number) {
+    if(typeof discriminator === 'string')
+      discriminator = parseInt(discriminator);
+    return this.client.api.post('/users/@me/relationships', { username, discriminator });
+  }
+
+  /**
+   * Delete a relationship with a user. This is the same as:
+   * - removing a friend,
+   * - canceling an outgoing friend request,
+   * - ignoring an incoming friend request,
+   * - or unblocking a user.
+   * @param id The ID of the user.
+   */
+  delete(id: string) {
+    return this.client.api.delete(`/users/@me/relationships/${id}`);
   }
 }
