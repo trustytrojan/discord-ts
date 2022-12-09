@@ -1,16 +1,16 @@
 import { inspect } from 'util';
 import colored from 'colored.js';
 
-interface NodeFetchClientOptions {
+interface FetchWrapperOptions {
   base_url: string;
   headers: HeadersInit;
 }
 
-export default class NodeFetchClient {
+export default class FetchWrapper {
   private base_url: string;
   private headers: HeadersInit;
 
-  constructor(options: NodeFetchClientOptions) {
+  constructor(options: FetchWrapperOptions) {
     this.base_url = options.base_url;
     this.headers = options.headers;
   }

@@ -1,6 +1,6 @@
-import NodeFetchClient from './NodeFetchClient';
+import FetchWrapper from './FetchWrapper';
 
-export default class DiscordAPIClient extends NodeFetchClient {  
+export default class DiscordAPIClient extends FetchWrapper {  
   constructor(api_version: number, token: string) {
     super({
       base_url: `https://discord.com/api/v${api_version}`,

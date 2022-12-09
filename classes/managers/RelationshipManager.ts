@@ -10,7 +10,13 @@ export default class RelationshipManager {
     this.cache = new Map<string, Relationship>();
   }
 
+  /**
+   * Send a friend request to a discord user.
+   * @param tag 
+   */
   addFriend(tag: string) {
     this.client.api.post('/users/@me/relationships', { tag });
   }
+
+  
 }

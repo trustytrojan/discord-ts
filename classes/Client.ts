@@ -2,7 +2,7 @@ import RelationshipManager from './managers/RelationshipManager';
 import DiscordAPIClient from '../DiscordAPIClient';
 
 export default class Client {
-  api: DiscordAPIClient;  
+  api: DiscordAPIClient;
   relationships: RelationshipManager;
 
   constructor(token: string) {
