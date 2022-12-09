@@ -16,6 +16,10 @@ export default class DiscordAPIClient extends FetchWrapper {
     return super.post(path, JSON.stringify(data));
   }
 
+  put(path: string, data?) {
+    return super.post(path, JSON.stringify(data));
+  }
+
   patch(path: string, data?) {
     return super.post(path, JSON.stringify(data));
   }

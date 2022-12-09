@@ -10,13 +10,18 @@ export default class RelationshipManager {
     this.cache = new Map<string, Relationship>();
   }
 
-  /**
-   * Send a friend request to a discord user.
-   * @param tag 
-   */
-  addFriend(tag: string) {
-    this.client.api.post('/users/@me/relationships', { tag });
+  async fetch() {
+    const data = await this.client.api.get('/users/@me/relationships');
+    for(const _data of data)
+      this.cache.set(_data.id, new Relationship(this.client, _data));
   }
 
-  
+  async sendFriendRequest(user_id: string) {
+    const [username, discriminator] = (await this.client.users.fetch(user_id)).tag.split('#');
+    this.client.api.post('/users/@me/relationships', { username, discriminator: parseInt(discriminator) });
+  }
+
+  cancelFriendRequest(user_id: string) {
+
+  }
 }

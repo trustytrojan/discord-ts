@@ -20,4 +20,11 @@ export default class User extends Base {
   async fetch() {
     
   }
+
+  addFriend() {
+    return this.client.api.post('/users/@me/relationships', {
+      username: this.username,
+      discriminator: parseInt(this.discriminator)
+    });
+  }
 }

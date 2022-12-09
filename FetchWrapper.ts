@@ -34,6 +34,10 @@ export default class FetchWrapper {
   post(path: string, body?: BodyInit) {
     return this.makeRequest(path, 'POST', body);
   }
+  
+  put(path: string, body?: BodyInit) {
+    return this.makeRequest(path, 'PUT', body);
+  }
 
   patch(path: string, body?: BodyInit) {
     return this.makeRequest(path, 'PATCH', body);
