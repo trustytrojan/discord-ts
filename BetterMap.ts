@@ -1,3 +1,5 @@
+import { randomInt } from 'crypto';
+
 export default class BetterMap<K, V> extends Map<K, V> {
   filter(predicate: (v: V, k: K) => boolean): BetterMap<K, V> {
     if(typeof predicate !== 'function')
@@ -13,5 +15,9 @@ export default class BetterMap<K, V> extends Map<K, V> {
     for(const [k,v] of this)
       if(predicate(v, k))
         return v;
+  }
+
+  random() {
+    return Array.from(this.values())[randomInt(this.size)];
   }
 }

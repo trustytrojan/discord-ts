@@ -1,19 +1,22 @@
 import RelationshipManager from './managers/RelationshipManager';
 import DiscordAPIClient from '../DiscordAPIClient';
 import UserManager from './managers/UserManager';
+import ClientUser from './ClientUser';
 
 export default class Client {
   api: DiscordAPIClient;
+  user: ClientUser;
   users: UserManager;
   relationships: RelationshipManager;
 
-  constructor(token: string) {
-    this.api = new DiscordAPIClient(9, token);
+  constructor() {
+    this.api = new DiscordAPIClient(9);
     this.users = new UserManager(this);
     this.relationships = new RelationshipManager(this);
   }
 
-  tokenLogin() {
-    return this.api.get('/users/@me');
+  async login(token): Promise<ClientUser> {
+    this.api.setToken(token);
+    return (this.user = await this.users.fetchMe());
   }
 }

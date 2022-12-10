@@ -2,14 +2,13 @@ import BetterMap from '../../BetterMap';
 import Client from '../Client';
 import Relationship from '../Relationship';
 import { RelationshipType } from '../../enums';
+import BaseManager from './BaseManager';
 
-export default class RelationshipManager {
-  private readonly client: Client;
+export default class RelationshipManager extends BaseManager {
   readonly cache: BetterMap<string, Relationship>;
 
   constructor(client: Client) {
-    this.client = client;
-    this.cache = new BetterMap<string, Relationship>();
+    super(client);
   }
 
   async fetch() {

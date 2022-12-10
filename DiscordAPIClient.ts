@@ -1,11 +1,15 @@
 import FetchWrapper from './FetchWrapper';
 
 export default class DiscordAPIClient extends FetchWrapper {  
-  constructor(api_version: number, token: string) {
+  constructor(api_version: number) {
     super({
       base_url: `https://discord.com/api/v${api_version}`,
-      headers: { authorization: token, 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' }
     });
+  }
+
+  setToken(token: string) {
+    this.headers['authorization'] = token;
   }
 
   get(path: string, data?) {

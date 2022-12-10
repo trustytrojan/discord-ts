@@ -1,14 +1,13 @@
 import { inspect } from 'util';
-import colored from 'colored.js';
 
 interface FetchWrapperOptions {
-  base_url: string;
-  headers: HeadersInit;
+  readonly base_url: string;
+  readonly headers: HeadersInit;
 }
 
 export default class FetchWrapper {
-  private base_url: string;
-  private headers: HeadersInit;
+  public readonly base_url: string;
+  public headers: HeadersInit;
 
   constructor(options: FetchWrapperOptions) {
     this.base_url = options.base_url;
@@ -20,7 +19,7 @@ export default class FetchWrapper {
     const resp = await fetch(url, { headers: this.headers, method, body });
     const data = await resp.json();
     if(!resp.ok) {
-      console.error(`\n${colored.red('api error!')}\nstatus: ${resp.status} ${resp.statusText}\nrequest method: ${method}\nrequest url: ${url}\nrequest body: ${colored.blue(body)}\n`);
+      console.error(`\napi error!\nstatus: ${resp.status} ${resp.statusText}\nrequest method: ${method}\nrequest url: ${url}\nrequest body: ${body}\n`);
       console.error(`error object: ${inspect(data, false, Infinity)}`);
       return null;
     }
