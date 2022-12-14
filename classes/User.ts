@@ -11,6 +11,7 @@ export default class User extends Base {
   banner: string | null;
   banner_color: string;
   accent_color: number;
+  
   connected_accounts: any[];
   premium_since?: Date;
   premium_type?: number;
