@@ -1,5 +1,5 @@
-import { copyDefinedProperties } from '../utils';
-import Client from './Client';
+import { copyDefinedProperties } from '../util/utils';
+import Client from '../Client';
 import User from './User';
 
 export default class ClientUser extends User {

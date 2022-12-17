@@ -1,5 +1,5 @@
-import BetterMap from '../../BetterMap';
-import Base from '../Base';
+import BetterMap from '../util/BetterMap';
+import Base from '../structures/Base';
 import Client from '../Client';
 
 export default class BaseManager {

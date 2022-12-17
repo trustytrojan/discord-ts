@@ -1,5 +1,5 @@
 import Base from './Base';
-import Client from './Client';
+import Client from '../Client';
 
 export default class User extends Base {
   username: string;

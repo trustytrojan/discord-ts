@@ -1,5 +1,7 @@
-import Client from './Client';
-import { timestampFromId } from '../utils';
+import Client from '../Client';
+
+const discord_epoch = 1420070400000n;
+export const timestampFromId = (id: string) => Number((BigInt(id) >> 22n) + discord_epoch);
 
 export default class Base {
   protected readonly client: Client;

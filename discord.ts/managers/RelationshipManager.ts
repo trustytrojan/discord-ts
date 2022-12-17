@@ -1,7 +1,7 @@
-import BetterMap from '../../BetterMap';
+import BetterMap from '../util/BetterMap';
 import Client from '../Client';
-import Relationship from '../Relationship';
-import { RelationshipType } from '../../enums';
+import Relationship from '../structures/Relationship';
+import { RelationshipType } from '../Enums';
 import BaseManager from './BaseManager';
 
 export default class RelationshipManager extends BaseManager {
@@ -45,7 +45,9 @@ export default class RelationshipManager extends BaseManager {
   }
 
   /**
-   * Delete a relationship with a user. This is the same as:
+   * Delete a relationship with a user.
+   * 
+   * Depending on the relationship's type, this is the same as:
    * - removing a friend,
    * - canceling an outgoing friend request,
    * - ignoring an incoming friend request,

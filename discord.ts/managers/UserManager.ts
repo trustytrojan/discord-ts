@@ -1,7 +1,7 @@
-import BetterMap from '../../BetterMap';
+import BetterMap from '../util/BetterMap';
 import Client from '../Client';
-import ClientUser from '../ClientUser';
-import User from '../User';
+import ClientUser from '../structures/ClientUser';
+import User from '../structures/User';
 import BaseManager from './BaseManager';
 
 export default class UserManager extends BaseManager {

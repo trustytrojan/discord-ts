@@ -1,7 +1,7 @@
 import RelationshipManager from './managers/RelationshipManager';
-import DiscordAPIClient from '../DiscordAPIClient';
+import DiscordAPIClient from './api/DiscordAPIClient';
 import UserManager from './managers/UserManager';
-import ClientUser from './ClientUser';
+import ClientUser from './structures/ClientUser';
 
 export default class Client {
   api: DiscordAPIClient;

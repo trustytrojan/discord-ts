@@ -1,4 +1,4 @@
-import FetchWrapper from './FetchWrapper';
+import FetchWrapper from '../../FetchWrapper';
 
 export default class DiscordAPIClient extends FetchWrapper {  
   constructor(api_version: number) {
