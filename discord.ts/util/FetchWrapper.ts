@@ -5,9 +5,9 @@ interface FetchWrapperOptions {
   readonly headers: HeadersInit;
 }
 
-export default class FetchWrapper {
-  public readonly base_url: string;
-  public headers: HeadersInit;
+export default abstract class FetchWrapper {
+  private readonly base_url: string;
+  protected readonly headers: HeadersInit;
 
   constructor(options: FetchWrapperOptions) {
     this.base_url = options.base_url;
@@ -19,8 +19,8 @@ export default class FetchWrapper {
     const resp = await fetch(url, { headers: this.headers, method, body });
     const data = await resp.json();
     if(!resp.ok) {
-      console.error(`\napi error!\nstatus: ${resp.status} ${resp.statusText}\nrequest method: ${method}\nrequest url: ${url}\nrequest body: ${body}\n`);
-      console.error(`error object: ${inspect(data, false, Infinity)}`);
+      console.error(`\nerror response!\nstatus: ${resp.status} ${resp.statusText}\nrequest method: ${method}\nrequest url: ${url}\nrequest body: ${body}\n`);
+      console.error(`error data: ${inspect(data, false, Infinity)}`);
       return null;
     }
     return data;
